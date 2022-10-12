@@ -1,0 +1,65 @@
+'''
+Problem #1: Evaluate Postfix expression
+Write a function to evaluate the value of an expression in postfix notation represented by a string with numbers between 0 and 9 and operators separated by whitespace. The expression supports 4 binary operators '+', '*', '-' and '/'.
+
+Note: Arithmetic Expressions can be written in Infix, Prefix or Postfix notations.
+
+Infix notations are human readable form of expression. For example: “3 + 4”.
+Prefix notations has operators before the operands like “+ 3 4” for the previous infix example.
+Postfix notations keep operators after operands. A postfix expression for the examples above would be “3 4 +”.
+Play with this infix, prefix and postfix notations on this infix and postfix converter and build an intuition.
+
+Example:
+
+Input: "5 1 2 + 4 * + 3 -"
+Output: 14
+
+The expression is evaluated as follows:
+5 3 4 * + 3 -
+5 12 + 3 -
+17 3 -
+14
+
+traverse the string and keep pushing the number into the stack until you find an operator
+pop last 2 values in stack and perform the operation
+push the result into stack and continue the same steps
+
+'''
+
+
+from collections import deque
+
+def evaluate(s):
+    stack = deque()
+    num1, num2, result = 0, 0, 0
+    for element in s:
+        if element.isnumeric():
+            stack.append(int(element))
+        elif stack:
+            if element == "+":
+                num2 = stack.pop()
+                num1 = stack.pop()
+                result = num1 + num2
+            elif element == "-":
+                num2 = stack.pop()
+                num1 = stack.pop()
+                result = num1 - num2
+            elif element == "*":
+                num2 = stack.pop()
+                num1 = stack.pop()
+                result = num1 * num2
+            elif element == "/":
+                num2 = stack.pop()
+                num1 = stack.pop()
+                result = num1 // num2
+            stack.append(int(result))
+        print(stack)
+    return result
+
+input= "5 1 2 + 4 * + 3 -"
+input= input.replace(" ","")
+print(evaluate(input))
+
+
+
+
