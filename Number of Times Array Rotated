@@ -39,6 +39,26 @@ def rotated(nums):
             right = middle
 
     return 0
+    
+#simpler solution    
+def rotated2(nums):
+    length = len(nums)
+    left = 0
+    right = length - 1
+    #check if it's already sorted
+    if nums[-1] > nums[0]:
+        return 0
+    while left < right:
+        middle = (left + right) // 2
+        if nums[middle] > nums[left]:
+            left = middle
+        elif nums[middle] < nums[left]:
+            right = middle
+        else:
+            return right
+
+
+
 arr = [3,4,5,1,2]
 arr1 = [2,3,4,5,1]
 arr2 = [6,8,12,1,3]
