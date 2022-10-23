@@ -1,0 +1,43 @@
+'''
+Bonus Problem: Increment an arbitrary precision integer
+Implement a function to increment an arbitrary precision integer represented in the form of an array, where each element in the array corresponds to a digit.
+
+Examples:
+
+Input: [1,2,3]
+Output: [1,2,4]
+Explanation: 123 + 1 = 124
+
+Input: [5,8,9]
+Output: [5,9,0]
+Explanation: 589 + 1 = 590
+
+Approach:
+traverse the array and conct each element to a string
+change the string to int and add 1
+traverse the string and add each element to the original array
+if the string is larger than the original array then append the last element
+'''
+
+def precision_integer(nums):
+    length = len(nums)
+    temp = ""
+    #traverse the array and conct each element to a string
+    for element in nums:
+        temp += str(element)
+    #change the string to int and add 1
+    temp = int(temp) + 1
+    temp = str(temp)
+    #traverse the string and add each element to the original array
+    for i in range(len(temp)):
+        #check if the string is greater than the array
+        if i > length - 1:
+            nums.append(temp[i])
+        nums[i] = temp[i]
+    return nums
+
+input = [9,9,9]
+
+print(precision_integer(input))
+
+
