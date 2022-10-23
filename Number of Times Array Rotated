@@ -16,6 +16,7 @@ check if middle-1>middle and middle+1 > middle-->solution here
 else if middle is greater than left then ignore the left part as it's sorted
 else if middle is less than left then ignore right part as it's sorted
 '''
+from math import ceil
 
 def rotated(nums):
     length = len(nums)
@@ -23,7 +24,7 @@ def rotated(nums):
     right = length - 1
     while left < right:
         #rounding up to handle the case when it's rotated n-1 times
-        middle = round((left + right) / 2)
+        middle = ceil((left + right) / 2)
         if nums[middle - 1] > nums[middle]:
             #try-except to handle the case if it's rotated n-1 times
             try:
@@ -35,7 +36,7 @@ def rotated(nums):
                     return middle
         elif nums[middle] > nums[left]:
             left = middle
-        elif nums[middle] < nums[left]:
+        elif nums[middle] <= nums[left]:
             right = middle
 
     return 0
