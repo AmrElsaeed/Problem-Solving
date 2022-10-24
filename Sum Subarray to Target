@@ -1,0 +1,38 @@
+'''
+Given an integer array, find a subarray having a given sum in it. 
+
+For example:
+
+Input:  nums[] = {2, 6, 0, 9, 7, 3, 1, 4, 1, 10}, target = 15 
+Output: {6, 0, 9} 
+
+Approach:
+Use a variable to maintain the sum of the current window
+Maintain a window [low, high-1]
+Consider every sublist starting from low index
+If the current window's sum is less than the given sum, then add elements to the current window from the right
+If the current window's sum is equal to the given sum, got it
+If the current window's sum is more than the given sum. Remove the current element (leftmost element) from the window
+
+'''
+def subarray_sum(nums, target):
+    l = len(nums)
+    window_sum = back = front = 0
+    sub = []
+    while back < len(nums):
+        #add new numbers while we haven't hit the target
+        while window_sum < target and front < l:
+            window_sum += nums[front]
+            front += 1
+        #the target is not in the array
+        if window_sum < target and back == 0 and front ==l:
+            break
+        #added new number, hit the target
+        if window_sum == target:
+            return nums[back:front]
+        #added new number, exceeded the target
+        while window_sum > target:
+            window_sum -= nums[back]
+            back += 1
+    return []
+print(subarray_sum([2,6,0,9,7,3,1,4,1,10],15))
