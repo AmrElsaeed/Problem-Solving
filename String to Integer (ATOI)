@@ -1,0 +1,53 @@
+'''
+Write a method to convert a string representation of an integer into its equivalent integer number.
+
+Examples:
+
+Input: "123"
+Output: 123
+
+Input: "-6714"
+Output: -6714
+
+PLAN:
+-clean the input (strip)
+- flag for negative 
+- get the ASCII value to change it to int
+- multiply by 10
+- add the next ASCII value
+
+'''
+
+
+def a_to_i(s):
+  s = s.strip()
+  if not s:
+    return None
+  negative = False
+  start = 0
+  output = 0
+  if s[0] == "-":
+    negative = True
+    start = 1
+     
+  for element in s[start:]:
+    output *= 10
+    output += ord(element) - 48
+    
+    
+  if negative:
+    return (output) * -1
+  else:
+    return output
+
+# def main():
+#   tests = [
+#     { 'input': '1', 'output': 1 },
+#     # ...
+#   ]
+
+#   for i in range(len(tests)):
+#     print(f'Test {i+1}:', a_to_i(tests[i]['input']) == tests[i]['output'])
+
+# main()
+print(a_to_i("-22"))
