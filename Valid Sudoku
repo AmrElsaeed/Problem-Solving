@@ -1,0 +1,59 @@
+import collections
+def solution(grid):
+    #check for rows and cols
+    row_checker = set()
+    col_checker = set()
+    for row in range(len(grid)):
+        for col in range(len(grid)):
+            #checking row wise
+            if grid[row][col] == ".":
+                pass
+            else:
+                if grid[row][col] in row_checker:
+                    return False
+                else:
+                    row_checker.add(grid[row][col])
+            #checking col wise
+            if grid[col][row] == ".":
+                pass
+            else:
+                if grid[col][row] in col_checker:
+                    return False
+                else:
+                    col_checker.add(grid[col][row])
+        row_checker.clear()
+        col_checker.clear()
+    
+    #checking 3*3
+    three_three = set()
+    for row in range(0,9,3):
+        for col in range(0, 9 ,3):
+            #each 3*3 grid speratly
+            for row1 in range(row, row+3):
+                for col1 in range(col,col+3):
+                    if grid[row1][col1] == ".":
+                        continue
+                    else:
+                        if grid[row1][col1] in three_three:
+                            return False
+                        else:
+                            three_three.add(grid[row1][col1])
+            three_three.clear()
+                        
+    
+    # #checkiong 3*3 wise
+    # three_three =collections.defaultdict(set)
+    
+    # for r in range(9):
+    #     for c in range(9):
+    #         if grid[r][c] == ".":
+    #             continue
+    #         if grid[r][c] in three_three[(r//3, c//3)]:
+    #             return False
+    #         three_three[(r//3, c//3)].add(grid[r][c])
+    
+
+   
+    
+    return True
+            
