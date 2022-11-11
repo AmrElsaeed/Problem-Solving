@@ -1,0 +1,52 @@
+'''
+given a string of integers, add the same consective integers together for example:
+Input: "999875"
+Output:"27875" --> 9+9+9=27
+
+Input:""448"
+Output: "16" --> 4+4=8  8+8=16
+
+create a stack and push equal consectivue elements
+if no elements then start popping from stack and summ the elements inside it
+
+'''
+def calculate(input):
+    length = len(input)
+    # stack to keep track of equal elements
+    stack = [input[0]]
+    i = 1
+    sum = 0
+    result =""
+    #traverse the string
+    while i<length:
+        #if equal add to stack
+        if input[i] == stack[-1]:
+            stack.append(input[i])
+        #get sum of all values in stack and add to result
+        else:
+            while stack:
+                sum += int(stack.pop())
+            result += str(sum)
+            stack.append(input[i])
+            sum = 0
+        i += 1
+    #if there are still values in stack then add them together and clear it
+    while stack:
+        sum += int(stack.pop())
+    #concatenate to result
+    result += str(sum)
+    
+    flag = False
+    #check for duplicates in the final result
+    for i in range(len(result) -1):
+        if result[i] == result[i+1]:
+            flag = True
+            break
+    #if duplicates found call the function again
+    if flag:
+        calculate(result)
+    return result
+    
+    
+
+print(calculate("00"))
