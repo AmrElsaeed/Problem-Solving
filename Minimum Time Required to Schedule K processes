@@ -1,0 +1,37 @@
+'''
+Given a positive integer K and an array arr[] consisting of N positive integers, such that arr[i] is the number of processes ith processor can schedule in 1 second. The task is to minimize the total time required to schedule K processes such that after scheduling by the ith processor, arr[i] is reduced to floor(arr[i]/2).
+
+Examples:
+
+Input: N = 5, arr[] = {3, 1, 7, 2, 4}, K = 15
+Output: 4
+Explanation:
+The order of scheduled process are as follows:
+
+The 3rd process is scheduled first. The array arr[] modifies to {3, 1, 3, 2, 4}, as arr[2] = floor(arr[2] / 2) = floor(7 / 2) = 3.
+The 5th process is scheduled next. The array arr[] modifies to {3, 1, 3, 2, 2}.
+The 1st process is scheduled next. The array arr[] modifies to {1, 1, 3, 2, 2}.
+The 2nd process is scheduled next. The array arr[] modifies to {3, 0, 3, 2, 4}.
+The total processes scheduled by all the process = 7 + 4 + 3 + 1 = 15(= K) and the total time required is 4 seconds.
+loop till k is 0
+find max of array and decrement it from k
+counter for seconds
+'''
+
+def schedule(N, arr, K):
+    seconds = 0
+    i = 0
+    while K > 0 and N > 0:
+        #find max of array
+        maximum = max(arr) #O(n)
+        index = arr.index(maximum)
+        K -= maximum
+        arr[index] //= 2
+        seconds += 1
+    return seconds if seconds else -1
+
+N = 4
+arr= [1, 5, 8, 6]
+K = 10
+
+print(schedule(N,arr,K))
